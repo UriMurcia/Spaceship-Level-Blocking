@@ -37,10 +37,11 @@ public class SpaceshipController : MonoBehaviour
         spaceship.transform.position = spaceshipPosition;
 
 
-        //spaceshipRotation.z = spaceship.transform.rotation.z - horizontalInput * Time.deltaTime * 90.0f;
+        spaceshipRotation.z = spaceship.transform.rotation.z - (horizontalInput * Time.deltaTime * 90.0f);
         //spaceshipRotation.x = spaceship.transform.rotation.x - verticalInput * Time.deltaTime * 90.0f;
-        //spaceshipRotation.y = 0.0f;
-        //spaceship.transform.Rotate(spaceshipRotation, Space.Self);
-        //spaceship.transform.rotation = Quaternion.Euler(spaceship.transform.rotation.x, 0.0f, spaceship.transform.rotation.z);
+        spaceshipRotation.x = 0.0f;
+        spaceshipRotation.y = 0.0f;
+        spaceship.transform.Rotate(spaceshipRotation, Space.Self);
+        
     }
 }
