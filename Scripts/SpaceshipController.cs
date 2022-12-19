@@ -6,24 +6,41 @@ public class SpaceshipController : MonoBehaviour
 {
     public float forwardVelocity = 0.2f;
     public float moveVelocity = 0.5f;
-    private Vector3 newPosition;
+    public GameObject spaceship;
+
+
+    private Vector3 forwardPosition;
+    private Vector3 spaceshipPosition;
+    private Vector3 spaceshipRotation;
+
 
     private void Start()
     {
-        newPosition = transform.position;
+        forwardPosition = transform.position;
+        spaceshipPosition = spaceship.transform.position;
     }
     // Update is called once per frame
     void Update()
     {
-        newPosition.z = transform.position.z + forwardVelocity;
-        
-        float horizontalInput = Input.GetAxis("Horizontal");
-        newPosition.x = transform.position.x + horizontalInput * moveVelocity;
+        forwardPosition.z = transform.position.z + forwardVelocity * Time.deltaTime;
+
+        transform.position = forwardPosition;
+
+
 
         float verticalInput = Input.GetAxis("Vertical");
-        newPosition.y = transform.position.y + verticalInput * moveVelocity;
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        spaceshipPosition.z = spaceship.transform.position.z;
+        spaceshipPosition.x = spaceship.transform.position.x + horizontalInput * moveVelocity * Time.deltaTime;
+        spaceshipPosition.y = spaceship.transform.position.y + verticalInput * moveVelocity * Time.deltaTime;
+        spaceship.transform.position = spaceshipPosition;
 
 
-        transform.position = newPosition;
+        //spaceshipRotation.z = spaceship.transform.rotation.z - horizontalInput * Time.deltaTime * 90.0f;
+        //spaceshipRotation.x = spaceship.transform.rotation.x - verticalInput * Time.deltaTime * 90.0f;
+        //spaceshipRotation.y = 0.0f;
+        //spaceship.transform.Rotate(spaceshipRotation, Space.Self);
+        //spaceship.transform.rotation = Quaternion.Euler(spaceship.transform.rotation.x, 0.0f, spaceship.transform.rotation.z);
     }
 }
